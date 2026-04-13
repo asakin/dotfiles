@@ -2,7 +2,7 @@ class Dotfiles < Formula
   desc "Minimal, opinionated zsh environment: Starship prompt, Antidote plugins, fzf, zoxide"
   homepage "https://github.com/asakin/dotfiles"
   url "https://github.com/asakin/dotfiles/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "PLACEHOLDER_COMPUTE_AFTER_TAGGING"
+  sha256 "16aef1201d77a6288a52338526279a430c86767aaf0b79a06b4d315b22e23d09"
   license "MIT"
 
   depends_on "starship"
