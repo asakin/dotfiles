@@ -1,0 +1,19 @@
+# Antidote plugins
+# Git support
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/gitfast
+
+# History and search
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions
+
+# Navigation
+ajeetdsouza/zoxide
+Aloxaf/fzf-tab
+
+# Docker support (optional — remove if not needed)
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+
+# Syntax highlighting (must be last)
+zsh-users/zsh-syntax-highlighting

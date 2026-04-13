@@ -1,0 +1,162 @@
+# Starship Configuration
+# https://starship.rs/config/
+
+add_newline = true
+scan_timeout = 10
+
+format = """
+[╭─](bold cyan)\
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$c\
+$golang\
+$java\
+$nodejs\
+$python\
+$rust\
+$terraform\
+$conda\
+$memory_usage\
+$env_var\
+$sudo\
+$cmd_duration\
+$line_break\
+[╰─](bold cyan)\
+$jobs\
+$battery\
+$time\
+$status\
+$shell\
+$character"""
+
+[username]
+style_user = "bold blue"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = false
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold blue) "
+trim_at = "."
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "at [$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+read_only = " 🔒"
+read_only_style = "red"
+
+[git_branch]
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+symbol = "🌱 "
+style = "bold purple"
+truncation_length = 20
+truncation_symbol = "…"
+
+[git_commit]
+commit_hash_length = 7
+format = "[\\($hash$tag\\)]($style) "
+style = "bold green"
+only_detached = true
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+conflicted = "🏳 "
+up_to_date = "✓"
+untracked = "🤷"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑 "
+
+[python]
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = "🐍 "
+style = "yellow bold"
+
+[nodejs]
+format = 'via [$symbol($version )]($style)'
+symbol = "⬢ "
+style = "bold green"
+
+[rust]
+format = 'via [$symbol($version )]($style)'
+symbol = "🦀 "
+style = "bold red"
+
+[docker_context]
+format = 'via [$symbol$context]($style) '
+symbol = "🐳 "
+style = "blue bold"
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+[jobs]
+format = "[$symbol$number]($style) "
+symbol = "✦ "
+style = "bold blue"
+
+[time]
+format = "at [$time]($style) "
+style = "bold white"
+use_12hr = false
+
+[status]
+format = '[$symbol$common_meaning$signal_name$maybe_int]($style) '
+symbol = "✖"
+style = "bold red"
+recognize_signal_code = true
+map_symbol = true
+disabled = false
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vimcmd_symbol = "[V](bold green)"
+
+[shell]
+format = "[$indicator]($style) "
+bash_indicator = "bsh"
+fish_indicator = "fsh"
+zsh_indicator = "zsh"
+powershell_indicator = "psh"
+disabled = false
+
+[package]
+format = 'is [$symbol$version]($style) '
+symbol = "📦 "
+style = "208 bold"
+
+[memory_usage]
+format = "via $symbol[$ram( | $swap)]($style) "
+symbol = "💾 "
+style = "bold dimmed white"
+threshold = 75
+disabled = false
+
+[line_break]
+disabled = false
