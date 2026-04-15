@@ -2,7 +2,7 @@
 # https://starship.rs/config/
 
 add_newline = true
-scan_timeout = 10
+scan_timeout = 250
 command_timeout = 2000
 
 format = """
