@@ -37,6 +37,7 @@ source ~/.zshrc
 | `home/.zshrc` | `~/.zshrc` |
 | `home/.zsh_plugins.txt` | `~/.zsh_plugins.txt` |
 | `home/.config/starship.toml` | `~/.config/starship.toml` |
+| `home/.tmux.conf` | `~/.tmux.conf` |
 
 Tools installed by `setup.sh`: `starship`, `zoxide`, `fzf`. Antidote is bootstrapped automatically on first `source ~/.zshrc`.
 
@@ -72,9 +73,13 @@ Removes symlinks and restores any backed-up originals. The repo at `~/.config/do
 
 ---
 
+## Personal layer
+
+This repo is the generic base. Personal tools, aliases, hotkeys, and AI integrations live in [asakin/sakinrc](https://github.com/asakin/sakinrc), which builds on top. Install dotfiles first, then sakinrc.
+
 ## What's not included
 
-This config is intentionally stripped down. No AWS, no cloud CLIs, no AI tool integrations. Those belong in your own layer on top. See the `home/.zshrc` comments for suggested extension points.
+This config is intentionally stripped down. No AWS, no cloud CLIs, no AI tool integrations. Those belong in your own layer on top. See [asakin/sakinrc](https://github.com/asakin/sakinrc) or the `home/.zshrc` comments for extension points.
 
 ---
 
