@@ -101,3 +101,72 @@ export VISUAL='vim'
 # Personal layer
 # ============================================================================
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# SakinOS API keys
+[ -f ~/projects/SakinOS/.env ] && source ~/projects/SakinOS/.env
+# OLLAMA_HOST moved to ~/.zshenv so non-interactive zsh inherits it (2026-04-29)
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+# ============================================================================
+# Claude Code — auto-worktree (any git repo)
+# Each `claude` invocation from inside any git working tree gets its own
+# worktree (--worktree). Solves multi-instance contention: parallel sessions
+# don't share index.lock, don't sweep each other's untracked files (a real
+# failure mode hit on 2026-04-30 — see _seeds/proposals/...session-replay).
+#
+# Skip rules:
+#  • Session-resume / one-shot / meta flags → no fresh worktree
+#    (-r, --resume, --continue, --fork-session, --from-pr, -p, --print,
+#     --help, -h, --version, -v, --no-session-persistence)
+#  • Custom escape hatch: pass --no-worktree (stripped before forwarding)
+#  • Already inside .claude/worktrees/ → don't nest
+#  • Not in a git repo (cd ~/Downloads etc.) → vanilla
+#
+# Symlinks resolved via ${PWD:A}.
+# Remove this block to revert.
+# ============================================================================
+claude() {
+  local skip_worktree=false
+  local args=()
+
+  for arg in "$@"; do
+    case "$arg" in
+      --no-worktree)
+        skip_worktree=true
+        ;;
+      -r|--resume|--continue|--fork-session|--from-pr|-p|--print|\
+--help|-h|--version|-v|--no-session-persistence)
+        skip_worktree=true
+        args+=("$arg")
+        ;;
+      *)
+        args+=("$arg")
+        ;;
+    esac
+  done
+
+  if $skip_worktree; then
+    command claude "${args[@]}"
+    return
+  fi
+
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    local pwd_resolved="${PWD:A}"
+    if [[ "$pwd_resolved" == *"/.claude/worktrees/"* ]]; then
+      command claude "${args[@]}"
+    else
+      command claude --worktree "${args[@]}"
+    fi
+  else
+    command claude "${args[@]}"
+  fi
+}
+
+alias claude-prune='git worktree prune && git worktree list | head -20'
+
+
+# §concierge TTS — copy text, type: speak
+# Optional flags: --voice shimmer --speed 1.5
+speak() { pbpaste | python3 ~/scripts/tts.py "$@" }
