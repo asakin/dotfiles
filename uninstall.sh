@@ -2,6 +2,11 @@
 # dotfiles uninstaller — removes symlinks created by install.sh
 # Restores .backup files if they exist.
 
+set -e
+
+# Self-detect: DOTFILES_DIR is wherever this script lives.
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
@@ -21,14 +26,15 @@ unlink_file() {
     fi
 }
 
-echo "Uninstalling dotfiles symlinks..."
+echo "Uninstalling dotfiles symlinks (repo at: $DOTFILES_DIR)..."
 echo ""
 
 unlink_file ".zshrc"
 unlink_file ".zsh_plugins.txt"
 unlink_file ".config/starship.toml"
+unlink_file ".tmux.conf"
 
 echo ""
 echo "Done. Your previous config has been restored where backups existed."
-echo "The dotfiles repo at ~/.config/dotfiles was not deleted."
-echo "To fully remove it: rm -rf ~/.config/dotfiles"
+echo "The dotfiles repo at $DOTFILES_DIR was not deleted."
+echo "To fully remove it: rm -rf \"$DOTFILES_DIR\""
