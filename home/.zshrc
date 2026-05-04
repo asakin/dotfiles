@@ -165,8 +165,3 @@ claude() {
 }
 
 alias claude-prune='git worktree prune && git worktree list | head -20'
-
-
-# §concierge TTS — copy text, type: speak
-# Optional flags: --voice shimmer --speed 1.5
-speak() { pbpaste | python3 ~/scripts/tts.py "$@" }
