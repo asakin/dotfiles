@@ -50,6 +50,7 @@ link ".zshrc"
 link ".zsh_plugins.txt"
 link ".config/starship.toml"
 link ".tmux.conf"
+link ".zshrc.compiled"
 
 echo ""
 echo -e "${GREEN}Dotfiles installed.${NC}"

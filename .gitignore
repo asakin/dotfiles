@@ -1,2 +1,8 @@
 .DS_Store
 *.backup
+.references/
+.dotfiles-registry
+home/.zshrc.compiled
+.references/
+.dotfiles-registry
+home/.zshrc.compiled

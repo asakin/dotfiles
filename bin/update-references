@@ -1,0 +1,24 @@
+#!/bin/bash
+REF_DIR="$HOME/projects/dotfiles/.references"
+mkdir -p "$REF_DIR"
+
+function update_repo() {
+    local name=$1
+    local url=$2
+    local target="$REF_DIR/$name"
+    if [ -d "$target" ]; then
+        echo "Updating $name..."
+        git -C "$target" pull --quiet
+    else
+        echo "Cloning $name..."
+        git clone --depth 1 "$url" "$target" --quiet
+    fi
+}
+
+update_repo "mathiasbynens" "https://github.com/mathiasbynens/dotfiles"
+update_repo "paulirish" "https://github.com/paulirish/dotfiles"
+update_repo "holman" "https://github.com/holman/dotfiles"
+update_repo "janmoesen" "https://github.com/janmoesen/tilde"
+
+echo "Compiling dotfiles..."
+"$HOME/projects/dotfiles/bin/compile-dotfiles"

@@ -108,3 +108,9 @@ export VISUAL='vim'
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+# Load Compiled Dotfiles
+[ -f ~/.zshrc.compiled ] && source ~/.zshrc.compiled
+
+# Added by Antigravity
+export PATH="/Users/arielsakin/.antigravity/antigravity/bin:$PATH"

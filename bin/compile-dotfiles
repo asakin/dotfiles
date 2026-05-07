@@ -1,0 +1,35 @@
+#!/bin/bash
+REGISTRY="$HOME/projects/dotfiles/.dotfiles-registry"
+OUT_FILE="$HOME/projects/dotfiles/home/.zshrc.compiled"
+REF_DIR="$HOME/projects/dotfiles/.references"
+
+touch "$REGISTRY"
+
+echo "# GENERATED FILE - DO NOT EDIT MANUALLY. Update .dotfiles-registry and run compile-dotfiles." > "$OUT_FILE"
+echo "" >> "$OUT_FILE"
+
+while IFS= read -r line; do
+  [[ -z "$line" || "$line" == \#* ]] && continue
+  
+  read -r type repo file target <<< "$line"
+  
+  target="${target#\"}"
+  target="${target%\"}"
+  target="${target#\'}"
+  target="${target%\'}"
+  
+  path="$REF_DIR/$repo/$file"
+  
+  if [[ -f "$path" ]]; then
+    if [[ "$type" == "import_func" ]]; then
+      awk "/^(function )?${target}\s*\(\)/,/^}/" "$path" >> "$OUT_FILE"
+    elif [[ "$type" == "import_ref" ]]; then
+      grep -E "^$target" "$path" | head -n 1 >> "$OUT_FILE"
+    fi
+    echo "" >> "$OUT_FILE"
+  else
+    echo "# ERROR: Reference not found: $path" >> "$OUT_FILE"
+  fi
+done < "$REGISTRY"
+
+echo "Dotfiles compiled successfully to .zshrc.compiled"
