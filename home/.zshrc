@@ -114,3 +114,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Added by Antigravity
 export PATH="/Users/arielsakin/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
