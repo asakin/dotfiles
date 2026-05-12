@@ -100,10 +100,9 @@ export VISUAL='vim'
 # ============================================================================
 # Personal layer
 # ============================================================================
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+TODO: this is currently polluted with sakinrc terminology, when this should be a project on top of that one
+[ -f ~/.zshrc.sakinrc ] && source ~/.zshrc.sakinrc
 
-# SakinOS API keys
-[ -f ~/projects/SakinOS/.env ] && source ~/projects/SakinOS/.env
 # OLLAMA_HOST moved to ~/.zshenv so non-interactive zsh inherits it (2026-04-29)
 
 
