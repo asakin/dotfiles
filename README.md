@@ -81,3 +81,14 @@ Stripped-down on purpose. No AWS, no cloud CLIs, no AI integrations. Those belon
 ## License
 
 MIT
+
+## Extensibility API
+
+This repository is designed to be a foundation that can be extended by other configuration layers. 
+
+To facilitate this, it exports an environment variable defining an API contract:
+`export DOTFILES_BASE_API_VERSION="1.0"`
+
+If you are building an extension on top of this repository, you should check for this version to ensure the required core infrastructure (Zsh, starship, zoxide, fzf, and the `.zshrc.extension` hook) is present and compatible. 
+
+If you fork this repository and modify these core dependencies, you must advance this version number to protect downstream extensions from breaking.

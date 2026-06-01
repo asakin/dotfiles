@@ -1,4 +1,26 @@
 # ============================================================================
+# DOTFILES API CONTRACT
+# ============================================================================
+# This environment variable signals to extension layers that this base 
+# environment is installed and honors a specific set of guarantees.
+# 
+# CONTRACT TRUTHS (v1.0):
+# 1. The shell is Zsh.
+# 2. The following core binaries are installed and available in the PATH:
+#    - starship
+#    - zoxide
+#    - fzf
+# 3. An extension hook file exists at ~/.zshrc.extension and will be sourced
+#    if present (this allows layers to inject their code silently).
+#
+# If you fork this repository and break backwards compatibility by removing 
+# or renaming ANY of the above requirements, you MUST advance the version 
+# number (e.g., to "2.0") to protect child extensions from failing.
+# ============================================================================
+export DOTFILES_BASE_API_VERSION="1.0"
+
+
+# ============================================================================
 # Completion System Configuration
 # ============================================================================
 # Case-insensitive completion
@@ -113,3 +135,15 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Added by Antigravity
 export PATH="/Users/arielsakin/.antigravity/antigravity/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/arielsakin/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/arielsakin/.local/bin:$PATH"
+
+# BEGIN SIGLIFY-ENV
+# Sourced by siglify — vars configured by: siglify configure
+[ -f "$HOME/.siglify/env" ] && . "$HOME/.siglify/env"
+# END SIGLIFY-ENV
